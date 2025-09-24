@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Page Not Found | Omkar Kumar Sharma - Civil Engineer</title>
+	<meta name="description" content="The page you're looking for doesn't exist. Return to Omkar Kumar Sharma's portfolio." />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+	<!-- Bootstrap 5.3 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<!-- Bootstrap Icons -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="style.css" />
+	<link rel="icon" type="image/jpeg" href="img/myphoto.jpeg" />
+	
+	<!-- Custom 404 styles -->
+	<style>
+		.error-404 {
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			padding: 100px 20px 50px;
+		}
+		
+		.error-number {
+			font-size: clamp(6rem, 12vw, 10rem);
+			font-weight: 800;
+			line-height: 0.8;
+			background: var(--gradient-text);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+			text-align: center;
+			margin-bottom: 1.5rem;
+			position: relative;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			user-select: none;
+		}
+		
+		.error-number:hover {
+			transform: scale(1.02);
+		}
+		
+		.construction-icon {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 4rem;
+			color: var(--color-accent);
+			opacity: 0.3;
+			animation: float 3s ease-in-out infinite;
+		}
+		
+		@keyframes float {
+			0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
+			50% { transform: translate(-50%, -50%) translateY(-10px); }
+		}
+		
+		.blueprint-lines {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-image: 
+				linear-gradient(rgba(74, 163, 255, 0.1) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(74, 163, 255, 0.1) 1px, transparent 1px);
+			background-size: 50px 50px;
+			animation: slideGrid 20s linear infinite;
+		}
+		
+		@keyframes slideGrid {
+			0% { transform: translate(0, 0); }
+			100% { transform: translate(50px, 50px); }
+		}
+		
+		.error-card {
+			max-width: 800px;
+			text-align: center;
+			position: relative;
+			z-index: 2;
+			margin: 0 auto;
+			width: 100%;
+		}
+		
+		.suggestion-card {
+			transition: all 0.3s ease;
+			cursor: pointer;
+		}
+		
+		.suggestion-card:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 8px 25px rgba(74, 163, 255, 0.2);
+		}
+		
+		/* Floating tools animation */
+		.floating-tools {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			pointer-events: none;
+			z-index: 1;
+		}
+		
+		.floating-tool {
+			position: absolute;
+			font-size: 2rem;
+			opacity: 0.6;
+			animation: floatTool 8s ease-in-out infinite;
+			pointer-events: all;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+		
+		.floating-tool:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+		.floating-tool:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+		.floating-tool:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 2s; }
+		.floating-tool:nth-child(4) { bottom: 20%; right: 10%; animation-delay: 3s; }
+		.floating-tool:nth-child(5) { top: 60%; left: 5%; animation-delay: 4s; }
+		.floating-tool:nth-child(6) { top: 70%; right: 25%; animation-delay: 5s; }
+		
+		@keyframes floatTool {
+			0%, 100% { transform: translateY(0px) rotate(0deg); }
+			25% { transform: translateY(-20px) rotate(90deg); }
+			50% { transform: translateY(-10px) rotate(180deg); }
+			75% { transform: translateY(-15px) rotate(270deg); }
+		}
+		
+		.construction-worker {
+			font-size: 3rem;
+			animation: bounce 2s ease-in-out infinite;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+		
+		@keyframes bounce {
+			0%, 100% { transform: translateY(0); }
+			50% { transform: translateY(-20px); }
+		}
+		
+		.speech-bubble {
+			position: absolute;
+			top: -60px;
+			left: 50%;
+			transform: translateX(-50%);
+			background: var(--glass-bg-strong);
+			padding: 0.5rem 1rem;
+			border-radius: 15px;
+			font-size: 0.8rem;
+			white-space: nowrap;
+			border: 1px solid var(--glass-border);
+			animation: popIn 0.3s ease;
+		}
+		
+		.speech-bubble::after {
+			content: '';
+			position: absolute;
+			bottom: -10px;
+			left: 50%;
+			transform: translateX(-50%);
+			border: 10px solid transparent;
+			border-top-color: var(--glass-bg-strong);
+		}
+		
+		@keyframes popIn {
+			0% { opacity: 0; transform: translateX(-50%) scale(0.5); }
+			100% { opacity: 1; transform: translateX(-50%) scale(1); }
+		}
+		
+		.shake-animation {
+			animation: shake 0.5s ease-in-out;
+		}
+		
+		@keyframes shake {
+			0%, 100% { transform: translateX(0); }
+			25% { transform: translateX(-5px); }
+			75% { transform: translateX(5px); }
+		}
+		
+		.confetti-piece {
+			position: fixed;
+			font-size: 1.5rem;
+			animation: confettiFall 3s linear forwards;
+			pointer-events: none;
+			z-index: 1000;
+		}
+		
+		@keyframes confettiFall {
+			0% { 
+				top: -20px; 
+				opacity: 1; 
+				transform: rotate(0deg); 
+			}
+			100% { 
+				top: 100vh; 
+				opacity: 0; 
+				transform: rotate(360deg); 
+			}
+		}
+		
+		.secret-message {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background: var(--glass-bg-strong);
+			padding: 2rem;
+			border-radius: var(--radius-md);
+			border: 2px solid var(--color-accent);
+			z-index: 10000;
+			text-align: center;
+			animation: secretReveal 0.5s ease;
+		}
+		
+		@keyframes secretReveal {
+			0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+			100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+		}
+		
+		.secret-mode {
+			animation: partyMode 5s ease-in-out;
+		}
+		
+		@keyframes partyMode {
+			0%, 100% { filter: hue-rotate(0deg); }
+			25% { filter: hue-rotate(90deg); }
+			50% { filter: hue-rotate(180deg); }
+			75% { filter: hue-rotate(270deg); }
+		}
+		
+		/* Compact navigation for 404 page */
+		.nav-404 {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			z-index: 1000;
+			padding: 1rem 0;
+		}
+		
+		.nav-404 .navbar-brand {
+			font-size: 1.2rem;
+		}
+		
+		/* Theme toggle positioning */
+		.theme-toggle-404 {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			z-index: 1001;
+		}
+		
+		.funny-section {
+			margin: 1.5rem 0;
+			padding: 1.5rem;
+			background: rgba(74, 163, 255, 0.1);
+			border-radius: var(--radius-md);
+			border: 1px solid rgba(74, 163, 255, 0.2);
+		}
+		
+		/* Responsive improvements */
+		@media (max-width: 768px) {
+			.error-404 {
+				padding: 80px 15px 30px;
+			}
+			
+			.error-number {
+				font-size: clamp(4rem, 20vw, 8rem);
+				margin-bottom: 1rem;
+			}
+			
+			.error-card {
+				padding: 2rem 1.5rem !important;
+			}
+			
+			.funny-section {
+				padding: 1rem;
+				margin: 1rem 0;
+			}
+			
+			.construction-worker {
+				font-size: 2rem;
+			}
+			
+			.floating-tool {
+				font-size: 1.5rem;
+			}
+			
+			.d-flex.gap-3 {
+				gap: 0.75rem !important;
+			}
+			
+			.btn-lg {
+				padding: 0.75rem 1.5rem;
+				font-size: 1rem;
+			}
+		}
+		
+		@media (max-width: 576px) {
+			.error-404 {
+				padding: 70px 10px 20px;
+			}
+			
+			.error-number {
+				font-size: clamp(3rem, 25vw, 6rem);
+			}
+			
+			.error-card {
+				padding: 1.5rem 1rem !important;
+			}
+			
+			.funny-section {
+				padding: 0.75rem;
+			}
+			
+			.d-flex.flex-column.flex-sm-row {
+				gap: 0.5rem !important;
+			}
+			
+			.btn-lg {
+				padding: 0.625rem 1.25rem;
+				font-size: 0.9rem;
+			}
+			
+			.row.g-3 {
+				--bs-gutter-x: 0.75rem;
+			}
+		}
+		
+		@keyframes revealUp {
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+		
+		@keyframes spin {
+			from { transform: rotate(0deg); }
+			to { transform: rotate(360deg); }
+		}
+		
+		/* Light theme adjustments for 404 page */
+		[data-theme='light'] .funny-section {
+			background: rgba(74, 163, 255, 0.05);
+			border-color: rgba(74, 163, 255, 0.15);
+		}
+		
+		[data-theme='light'] .speech-bubble {
+			background: rgba(255, 255, 255, 0.9);
+			color: #2d3748;
+		}
+		
+		[data-theme='light'] .speech-bubble::after {
+			border-top-color: rgba(255, 255, 255, 0.9);
+		}
+		
+		/* Loading state */
+		body:not(.loaded) .error-404 {
+			opacity: 0;
+		}
+		
+		body.loaded .error-404 {
+			opacity: 1;
+			transition: opacity 0.5s ease-in-out;
+		}
+		
+		/* Navigation hints styling */
+		.navigation-hints {
+			background: rgba(108, 117, 125, 0.1);
+			border-radius: 8px;
+			padding: 1rem;
+			border: 1px solid rgba(108, 117, 125, 0.2);
+		}
+		
+		.path-segments .badge {
+			text-transform: capitalize;
+			font-size: 0.75rem;
+		}
+		
+		/* Better button spacing */
+		.d-flex.flex-column.flex-sm-row .btn {
+			min-width: 140px;
+		}
+		
+		/* Enhanced progress bar */
+		.progress {
+			background: rgba(108, 117, 125, 0.2) !important;
+			overflow: hidden;
+		}
+		
+		.progress-bar {
+			background: linear-gradient(90deg, var(--color-accent), var(--color-accent-alt)) !important;
+		}
+	</style>
+</head>
+<body>
+	<!-- Animated background blobs -->
+	<div class="bg-blobs" aria-hidden="true">
+		<div class="blob blob-1"></div>
+		<div class="blob blob-2"></div>
+		<div class="blob blob-3"></div>
+		<div class="glass-overlay"></div>
+	</div>
+	
+	<!-- Blueprint grid overlay -->
+	<div class="blueprint-lines" aria-hidden="true"></div>
+	
+	<!-- Floating Tools -->
+	<div class="floating-tools" id="floating-tools" aria-hidden="true"></div>
+
+	<!-- Compact Navigation -->
+	<nav class="navbar glass-nav nav-404">
+		<div class="container-fluid px-3 px-md-5">
+			<a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="index.html">
+				<span class="brand-initial">O</span>
+				<span>Omkar<span class="text-gradient">Sharma</span></span>
+			</a>
+		</div>
+	</nav>
+
+	<!-- Theme Toggle -->
+	<div class="theme-toggle-404">
+		<button id="themeToggle" class="btn btn-sm btn-outline-light rounded-pill d-flex align-items-center gap-1" data-sound="switch">
+			<span class="icon">🌙</span>
+		</button>
+	</div>
+
+	<!-- 404 Error Section -->
+	<main class="error-404">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="error-card glass-card p-5" data-reveal>
+						<div class="error-number position-relative" title="Click me 10 times for a surprise! 🎉">
+							404
+							<div class="construction-icon">
+								<i class="bi bi-tools"></i>
+							</div>
+						</div>
+						
+						<h1 class="h2 fw-bold mb-3">
+							<span class="text-gradient">Under Construction Zone</span>
+						</h1>
+						
+						<!-- Funny Construction Joke -->
+						<div class="funny-section mb-4">
+							<h5 class="mb-3"><i class="bi bi-emoji-laughing"></i> Construction Site Humor</h5>
+							<p class="lead text-center" id="construction-joke">
+								Loading dad joke...
+							</p>
+							
+							<!-- Bouncing Worker -->
+							<div class="d-flex justify-content-center mt-3">
+								<div id="bouncing-worker"></div>
+							</div>
+						</div>
+						
+						<p class="lead mb-4 text-secondary">
+							Oops! It looks like you've wandered into an unfinished part of the construction site. 
+							The page you're looking for doesn't exist or has been moved.
+						</p>
+						
+						<!-- Fake Progress Bar -->
+						<div id="fake-progress" class="mb-4"></div>
+						
+						<!-- Funny Reason Generator -->
+						<div class="funny-section mb-4">
+							<h6 class="mb-3">🤔 Why is this page missing?</h6>
+							<button id="reason-generator" class="btn btn-outline-primary btn-sm mb-3" data-sound="click">
+								<i class="bi bi-arrow-clockwise"></i> Generate Funny Reason
+							</button>
+							<div id="funny-reason" class="small text-secondary">
+								<i class="bi bi-lightbulb"></i> Click the button above to find out!
+							</div>
+						</div>
+						
+						<div class="d-flex flex-column flex-sm-row gap-3 justify-content-center mb-5">
+							<a href="index.html" class="btn btn-primary btn-lg glass-btn" data-sound="click">
+								<i class="bi bi-house-door me-2"></i>Return Home
+							</a>
+							<a href="index.html#projects" class="btn btn-outline-light btn-lg glass-btn-alt" data-sound="click">
+								<i class="bi bi-briefcase me-2"></i>View Projects
+							</a>
+							<a href="index.html#contact" class="btn btn-outline-light btn-lg glass-btn-alt" data-sound="click">
+								<i class="bi bi-envelope me-2"></i>Contact Me
+							</a>
+						</div>
+						
+						<!-- Fun Interactive Section -->
+						<div class="funny-section">
+							<h6 class="mb-3">🎮 Interactive Fun Zone</h6>
+							<div class="row g-3 text-center">
+								<div class="col-md-4">
+									<button class="btn btn-outline-secondary btn-sm w-100" data-sound="bounce" onclick="this.style.transform='scale(0.9)'; setTimeout(() => this.style.transform='scale(1)', 100)">
+										<i class="bi bi-hammer"></i> Hammer Sound
+									</button>
+								</div>
+								<div class="col-md-4">
+									<button class="btn btn-outline-secondary btn-sm w-100" data-sound="tool" onclick="this.style.animation='spin 0.5s'">
+										<i class="bi bi-wrench"></i> Tool Sound
+									</button>
+								</div>
+								<div class="col-md-4">
+									<button class="btn btn-outline-secondary btn-sm w-100" data-sound="celebration" onclick="showConfetti()">
+										<i class="bi bi-party-hat"></i> Celebrate!
+									</button>
+								</div>
+							</div>
+							<div class="mt-3 small text-secondary">
+								<i class="bi bi-info-circle"></i> 
+								Pro tip: Try the Konami code (↑↑↓↓←→←→BA) or press Ctrl+H to go home!
+							</div>
+						</div>
+						
+						<!-- Quick Navigation Suggestions -->
+						<div class="row g-3 mt-4">
+							<div class="col-md-4">
+								<div class="suggestion-card glass-card p-3 h-100" onclick="window.location.href='index.html#about'">
+									<div class="text-center">
+										<i class="bi bi-person-circle display-6 text-gradient mb-2"></i>
+										<h5 class="mb-2">About Me</h5>
+										<p class="small text-secondary mb-0">Learn about my background and expertise</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="suggestion-card glass-card p-3 h-100" onclick="window.location.href='index.html#skills'">
+									<div class="text-center">
+										<i class="bi bi-gear-wide-connected display-6 text-gradient mb-2"></i>
+										<h5 class="mb-2">Skills</h5>
+										<p class="small text-secondary mb-0">Explore my technical capabilities</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="suggestion-card glass-card p-3 h-100" onclick="window.location.href='reports.html'">
+									<div class="text-center">
+										<i class="bi bi-file-earmark-text display-6 text-gradient mb-2"></i>
+										<h5 class="mb-2">Reports</h5>
+										<p class="small text-secondary mb-0">View technical documentation</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Error Code Info -->
+						<div class="mt-5 pt-4 border-top border-secondary border-opacity-25">
+							<div class="row text-center g-3">
+								<div class="col-md-4">
+									<div class="small text-secondary">
+										<strong>Error Code</strong><br>
+										<span class="text-gradient">404</span>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="small text-secondary">
+										<strong>Status</strong><br>
+										<span class="text-gradient">Page Not Found</span>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="small text-secondary">
+										<strong>Solution</strong><br>
+										<span class="text-gradient">Navigation Above</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Footer -->
+	<footer class="py-3 small text-center position-fixed bottom-0 start-0 end-0" style="z-index: -1;">
+		<div class="container">
+			<p class="mb-0 opacity-75">© <span id="year"></span> Omkar Kumar Sharma. Building better tomorrow.</p>
+		</div>
+	</footer>
+
+	<!-- Scripts -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<script src="404.js"></script>
+</body>
+</html>
